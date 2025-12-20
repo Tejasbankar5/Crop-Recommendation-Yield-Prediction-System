@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Yield Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='yield.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌾 Crop Yield Prediction</h1>
+            <p>Estimate your expected crop production per acre</p>
+        </header>
+
+        <form action="{{ url_for('predict_yield') }}" method="POST" class="form-box">
+            <div class="input-group">
+                <input type="number" name="N" step="0.01" placeholder="Nitrogen (N)" required>
+                <input type="number" name="P" step="0.01" placeholder="Phosphorus (P)" required>
+                <input type="number" name="K" step="0.01" placeholder="Potassium (K)" required>
+            </div>
+
+            <div class="input-group">
+                <input type="number" name="temperature" step="0.01" placeholder="Temperature (°C)" required>
+                <input type="number" name="humidity" step="0.01" placeholder="Humidity (%)" required>
+                <input type="number" name="ph" step="0.01" placeholder="pH" required>
+            </div>
+
+            <div class="input-group">
+                <input type="number" name="rainfall" step="0.01" placeholder="Rainfall (mm)" required>
+                <select name="label" required>
+                    <option value="" disabled selected>Select Crop Type</option>
+                    {% for crop in ['rice','maize','chickpea','kidneybeans','pigeonpeas','mothbeans','mungbean',
+                    'blackgram','lentil','pomegranate','banana','mango','grapes','watermelon','muskmelon','apple',
+                    'orange','papaya','coconut','cotton','jute','coffee'] %}
+                        <option value="{{ crop }}">{{ crop.capitalize() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="predict-btn">Predict Yield</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box">
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+
+        <footer>
+            <a href="/">← Back to Home</a>
+        </footer>
+    </div>
+</body>
+</html>

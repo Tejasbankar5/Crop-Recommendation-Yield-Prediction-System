@@ -1,0 +1,516 @@
+/* ===== CSS Variables - Dark Theme ===== */
+:root {
+    --primary-green: #4caf50;
+    --secondary-green: #66bb6a;
+    --light-green: #81c784;
+    --dark-bg: #121212;
+    --darker-bg: #0a0a0a;
+    --card-bg: #1e1e1e;
+    --card-border: #333333;
+    --text-light: #e0e0e0;
+    --text-muted: #aaaaaa;
+    --text-dark: #ffffff;
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.4);
+    --border-radius: 20px;
+    --transition: all 0.3s ease;
+}
+
+/* ===== Base Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a1a1a 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ===== Background Animation ===== */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+    animation: waveAnimation 8s linear infinite;
+    transform-origin: center bottom;
+}
+
+.wave:nth-child(1) {
+    animation-delay: 0s;
+    opacity: 0.2;
+}
+
+.wave:nth-child(2) {
+    animation-delay: -2s;
+    opacity: 0.15;
+}
+
+.wave:nth-child(3) {
+    animation-delay: -4s;
+    opacity: 0.1;
+}
+
+@keyframes waveAnimation {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1);
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.8);
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1);
+    }
+}
+
+/* ===== Floating Leaves Animation ===== */
+.leaves-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.leaf {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.2;
+    animation: floatLeaf 15s linear infinite;
+    filter: brightness(0.8);
+}
+
+.leaf:nth-child(1) { left: 10%; animation-delay: 0s; }
+.leaf:nth-child(2) { left: 20%; animation-delay: -2s; }
+.leaf:nth-child(3) { left: 30%; animation-delay: -4s; }
+.leaf:nth-child(4) { left: 70%; animation-delay: -6s; }
+.leaf:nth-child(5) { left: 90%; animation-delay: -8s; }
+
+@keyframes floatLeaf {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.2;
+    }
+    90% {
+        opacity: 0.2;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== Container & Layout ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Header Styles ===== */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+.title-icon {
+    font-size: 4rem;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.5));
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.tagline {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== Glassmorphism Effect ===== */
+.glassmorphism {
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+}
+
+/* ===== Form Card ===== */
+.form-card {
+    padding: 40px;
+    margin-bottom: 30px;
+    transition: var(--transition);
+}
+
+.form-card:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-5px);
+}
+
+/* ===== Input Grid ===== */
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.label-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+}
+
+.value-display {
+    background: var(--primary-green);
+    color: var(--text-dark);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-width: 50px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* ===== Slider Styles ===== */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--light-green), var(--primary-green));
+    outline: none;
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.slider:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--text-dark);
+    border: 3px solid var(--primary-green);
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: var(--transition);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+}
+
+.slider-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+/* ===== Button Styles ===== */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.submit-btn, .reset-btn {
+    position: relative;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    overflow: hidden;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+    color: var(--text-dark);
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(46, 125, 50, 0.6);
+}
+
+.reset-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.reset-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* ===== Ripple Effect ===== */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ===== Result Card ===== */
+.result-card {
+    padding: 30px;
+    text-align: center;
+    margin-top: 20px;
+    border-left: 5px solid var(--primary-green);
+    background: rgba(30, 30, 30, 0.8);
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.result-icon {
+    font-size: 2.5rem;
+    animation: pulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.5));
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.result-title {
+    font-size: 1.8rem;
+    color: var(--primary-green);
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.result-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.result-text {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-light);
+    background: rgba(76, 175, 80, 0.15);
+    padding: 15px 25px;
+    border-radius: 15px;
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.result-decoration {
+    font-size: 3rem;
+}
+
+.growing-plant {
+    animation: grow 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.3));
+}
+
+@keyframes grow {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* ===== Footer ===== */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+.footer-text {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .title-icon {
+        font-size: 3rem;
+    }
+    
+    .form-card {
+        padding: 25px 20px;
+    }
+    
+    .input-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .submit-btn, .reset-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .result-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .result-text {
+        min-width: auto;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .form-card {
+        padding: 20px 15px;
+    }
+    
+    .input-label {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .value-display {
+        align-self: flex-end;
+    }
+}

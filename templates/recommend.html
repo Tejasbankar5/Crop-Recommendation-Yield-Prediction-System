@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌾 CropSense - Smart Farming Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <!-- Floating Leaves Animation -->
+    <div class="leaves-container">
+        <div class="leaf">🍃</div>
+        <div class="leaf">🌿</div>
+        <div class="leaf">🍂</div>
+        <div class="leaf">🌱</div>
+        <div class="leaf">🍃</div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="title">
+                <span class="title-icon">🌾</span>
+                CropSense
+            </h1>
+            <p class="tagline">Smart farming decisions powered by AI</p>
+            <p class="subtitle">Enter your soil and climate parameters to get the perfect crop recommendation</p>
+        </header>
+
+        <!-- Main Form Section -->
+        <main class="main-content">
+            <form action="/predict" method="post" class="form-card glassmorphism">
+                <div class="input-grid">
+                    <!-- Nitrogen Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">🌱 Nitrogen (N)</span>
+                            <span class="value-display" id="N-value">0</span>
+                        </label>
+                        <input type="range" name="N" min="0" max="140" value="0" step="1" class="slider" id="N-slider">
+                        <div class="slider-ticks">
+                            <span>0</span>
+                            <span>70</span>
+                            <span>140</span>
+                        </div>
+                    </div>
+
+                    <!-- Phosphorus Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">🧪 Phosphorus (P)</span>
+                            <span class="value-display" id="P-value">0</span>
+                        </label>
+                        <input type="range" name="P" min="5" max="145" value="0" step="1" class="slider" id="P-slider">
+                        <div class="slider-ticks">
+                            <span>5</span>
+                            <span>75</span>
+                            <span>145</span>
+                        </div>
+                    </div>
+
+                    <!-- Potassium Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">⚡ Potassium (K)</span>
+                            <span class="value-display" id="K-value">0</span>
+                        </label>
+                        <input type="range" name="K" min="5" max="205" value="0" step="1" class="slider" id="K-slider">
+                        <div class="slider-ticks">
+                            <span>5</span>
+                            <span>105</span>
+                            <span>205</span>
+                        </div>
+                    </div>
+
+                    <!-- Temperature Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">🌡️ Temperature (°C)</span>
+                            <span class="value-display" id="temperature-value">0</span>
+                        </label>
+                        <input type="range" name="temperature" min="8" max="44" value="0" step="0.1" class="slider" id="temperature-slider">
+                        <div class="slider-ticks">
+                            <span>8°</span>
+                            <span>26°</span>
+                            <span>44°</span>
+                        </div>
+                    </div>
+
+                    <!-- Humidity Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">💧 Humidity (%)</span>
+                            <span class="value-display" id="humidity-value">0</span>
+                        </label>
+                        <input type="range" name="humidity" min="14" max="100" value="0" step="1" class="slider" id="humidity-slider">
+                        <div class="slider-ticks">
+                            <span>14%</span>
+                            <span>57%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+
+                    <!-- pH Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">🧪 pH Level</span>
+                            <span class="value-display" id="ph-value">0</span>
+                        </label>
+                        <input type="range" name="ph" min="3.5" max="10" value="0" step="0.1" class="slider" id="ph-slider">
+                        <div class="slider-ticks">
+                            <span>3.5</span>
+                            <span>6.8</span>
+                            <span>10</span>
+                        </div>
+                    </div>
+
+                    <!-- Rainfall Input -->
+                    <div class="input-group">
+                        <label class="input-label">
+                            <span class="label-text">🌧️ Rainfall (mm)</span>
+                            <span class="value-display" id="rainfall-value">0</span>
+                        </label>
+                        <input type="range" name="rainfall" min="20" max="300" value="0" step="1" class="slider" id="rainfall-slider">
+                        <div class="slider-ticks">
+                            <span>20mm</span>
+                            <span>160mm</span>
+                            <span>300mm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button type="submit" class="submit-btn ripple">
+                        <span class="btn-text">🌱 Get Crop Recommendation</span>
+                        <div class="ripple-effect"></div>
+                    </button>
+                    <button type="button" class="reset-btn" id="reset-btn">
+                        <span class="btn-text">🔄 Reset All</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            {% if result %}
+            <div class="result-card glassmorphism fade-in">
+                <div class="result-header">
+                    <span class="result-icon">🌾</span>
+                    <h3 class="result-title">Recommended Crop</h3>
+                </div>
+                <div class="result-content">
+                    <p class="result-text">{{ result }}</p>
+                    <div class="result-decoration">
+                        <div class="growing-plant">🌿</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">🌍 Making agriculture smarter, one recommendation at a time</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
